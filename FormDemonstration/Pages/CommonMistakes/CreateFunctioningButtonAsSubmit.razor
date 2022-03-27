@@ -1,0 +1,27 @@
+﻿@page "/create-functioning-button-as-submit"
+@using FormDemonstration.FormModels.CommonMistakes
+
+<h3>CreateFunctioningButtonAsSubmit</h3>
+<EditForm Model="FormModel" OnSubmit="Submit">
+    <button class="btn btn-outline-success">Submit (button tag)</button>
+    <input type="submit" class="btn btn-outline-success" value="Submit (input tag)" />
+    <input type="button" class="btn btn-outline-success" @onclick="Method1" value="Call Method (input tag)" />
+    <button type="button" class="btn btn-outline-success" @onclick="Method1" value="">Call Method (button tag)</button>
+    <button class="btn btn-outline-danger" @onclick="Method1">(Not Intended) Call Method & Submit</button>
+</EditForm>
+@((MarkupString)Log)
+
+@code {
+    public CreateFunctioningButtonAsSubmitFormModel FormModel { get; set; } = new();
+    public string Log { get; set; } = "";
+
+    public void Submit()
+    {
+        Log += $"<div><span class='text-primary'>{nameof(Submit)}</span> called</div>";
+    }
+
+    public void Method1()
+    {
+        Log+=$"<div><span class='text-primary'>{nameof(Method1)}</span> called</div>";
+    }
+}
